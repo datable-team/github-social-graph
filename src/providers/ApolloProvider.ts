@@ -6,6 +6,6 @@ export const apolloClient = new ApolloClient({
   uri: 'https://api.github.com/graphql',
   cache: new InMemoryCache(),
   headers: {
-   Authorization: `Bearer ${ACCESS_TOKEN}`,
+  //  Authorization: `Bearer ${ACCESS_TOKEN}`,
   }
 })

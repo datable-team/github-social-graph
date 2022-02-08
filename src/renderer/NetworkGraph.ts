@@ -25,7 +25,7 @@ const EDGE_WIDTH = .125
 const ARROWHEAD_H = 2
 const ARROWHEAD_W = .75
 
-const DEFAULT_BG_COLOR = '#9e9e9e' 
+const DEFAULT_BG_COLOR = '#CCCCCC' 
 const DEFAULT_FONT_COLOR = '#35425F' // gray-800
 const DEFAULT_LABEL_COLOR = '#623CEA' // purple-500
 
@@ -213,6 +213,29 @@ function drawNode($ctx: CanvasRenderingContext2D, node: NetworkGraphNode<any>) {
       break
     }
     case 'text': {
+      if (node.label) {
+        $ctx.save()
+        $ctx.font = '1.75px sans-serif'
+        $ctx.textAlign = 'center'
+        $ctx.textBaseline = 'middle'
+        const { width } = $ctx.measureText(node.label)
+    
+        $ctx.beginPath()
+        $ctx.moveTo(x - width / 2, y - 1.5)
+        $ctx.lineTo(x + width / 2, y - 1.5)
+        $ctx.arc(x + width / 2, y, 1.5, Math.PI / -2, Math.PI / 2)
+        $ctx.lineTo(x + width / 2, y + 1.5)
+        $ctx.lineTo(x - width / 2, y + 1.5)
+        $ctx.arc(x - width / 2, y, 1.5, Math.PI / 2, Math.PI / -2)
+        $ctx.fillStyle = '#333333'
+        $ctx.fill()
+    
+        $ctx.fillStyle = '#FFFFFF'
+        $ctx.fillText(node.label, x, y)
+        $ctx.restore()
+  
+      }
+      break
     }
   }
 }
@@ -270,11 +293,6 @@ function drawLabel($ctx: CanvasRenderingContext2D, node: NetworkGraphNode<any>) 
   }
 
   if (node.shape === 'text') {
-    $ctx.fillStyle = node.fontColor ?? DEFAULT_FONT_COLOR
-    $ctx.font = '1.75px sans-serif'
-    $ctx.textAlign = 'center'
-    $ctx.textBaseline = 'middle'
-    $ctx.fillText(node.label, x, y)
   } else {
 
     $ctx.save()
