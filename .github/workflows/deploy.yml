@@ -1,32 +1,34 @@
-name: Build and Deploy
+name: github pages
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [14.x]
-
+  deploy:
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+      - name: Setup Node
+        uses: actions/setup-node@v2.1.2
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: '14.x'
 
-      - name: Npm install 🔧
-        run: npm ci
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
-      - name: Npm build 🔧
-        run: npm run build
+      - run: npm ci
+      - run: npm run build
 
-      - name: Install and Deploy 🚀
-        run: |
-          git config --global credential.helper wincred
-          npm run deploy
+      - name: Deploy 🚀
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
