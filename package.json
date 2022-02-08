@@ -5,8 +5,7 @@
     "generate-types": "graphql-codegen --config codegen.yml",
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build --base=./",
-    "preview": "vite preview",
-    "deploy": "gh-pages -d dist"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@apollo/client": "^3.5.8",
