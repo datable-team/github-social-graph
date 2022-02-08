@@ -28,6 +28,6 @@ jobs:
 
       - name: Install and Deploy 🚀
         run: |
-          git config --global user.email "aud1220a@gmail.com"
-          git config --global user.name "moka-a"
+          git config --global user.email "action@github.com"
+          git config --global user.name "Github Action"
           npm run deploy
