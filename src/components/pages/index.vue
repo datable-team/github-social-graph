@@ -118,7 +118,7 @@ async function getStarredRepositories(nickname: string) {
         <form @submit.prevent="onSubmit">
           <input
             class="px-1 py-2 placeholder-gray-400 border-b border-gray-200 focus:outline-none focus:ring-0"
-            placeholder="Github 닉네임 검색"
+            placeholder="Github 아이디 검색"
             v-model="inputNickname"
           />
         </form>
