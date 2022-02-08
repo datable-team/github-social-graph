@@ -1,0 +1,16 @@
+overwrite: true
+schema:
+  - https://api.github.com/graphql:
+      headers:
+        Authorization: 'Bearer AccessToken' # Get from https://github.com/settings/tokens
+documents: 'src/gql/**/*.gql'
+generates:
+  src/types/api.ts:
+    - typescript
+    - typescript-operations
+config:
+  scalars:
+    Date: string
+    Jumin: string
+    Phone: string
+    Url: string

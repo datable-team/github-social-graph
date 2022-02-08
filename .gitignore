@@ -1,0 +1,22 @@
+.DS_Store
+*.local
+
+# dependencies
+node_modules
+
+.serverless
+
+# logs
+npm-debug.log
+
+# generate
+dist
+dist-ssr
+
+.env
+.env.local
+.envrc
+.env-cmdrc.js
+
+# vscode
+.vscode

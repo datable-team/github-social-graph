@@ -1,0 +1,22 @@
+query GetUserStarredRepositories($nickname: String!, $lastCursor: String) {
+  user(login: $nickname) {
+    id
+    login
+    name
+    bio
+    email
+    websiteUrl
+    avatarUrl(size: 100)
+
+    starredRepositories(first: 100, after: $lastCursor) {
+      edges {
+        node {
+          id
+          name
+          projectsUrl
+        }
+        cursor
+      }
+    }
+  }
+}
