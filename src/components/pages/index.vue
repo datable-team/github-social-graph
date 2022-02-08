@@ -127,7 +127,9 @@ async function getStarredRepositories(nickname: string) {
 
       <template v-if="currentUser">
         <div class="flex items-center space-x-4">
-          <img class="w-12 h-12 rounded-2xl" :src="currentUser.avatar_url" />
+          <template v-if="currentUser.avatar_url">
+            <img class="w-12 h-12 rounded-2xl" :src="currentUser.avatar_url" />
+          </template>
 
           <div class="text-sm text-gray-600">
             <div class="space-x-1">
